@@ -19,7 +19,7 @@ fi
 site_name=$1
 
 # Run nmap with the provided site name
-nmap --script ssl-cert,ssl-enum-ciphers -p 443 $site_name -oN test.nmap
+nmap --script ssl-cert,ssl-enum-ciphers -p 443 $site_name -oN $site_name.nmap
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Download updated certificate status from ciphersuite.com #
