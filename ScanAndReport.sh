@@ -4,6 +4,7 @@
 # Created 20230921
 # Created by Tom R.
 # Example Command - scanandreport.sh example.com
+# The output can be sorted by severity, by adjusting which SED command is commented.
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Running NMAP Scan and Creating Output File #
@@ -71,7 +72,12 @@ done
 # Create final report and clean up #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-sed -n '/^TLS_/p' prereport.txt > $site_name.txt
+# This SED does not sort the output by severity. Use only one per file name.
+#sed -n '/^TLS_/p' prereport.txt > $site_name.txt
+
+# This SED sorts the output by severity. Use only one per file name.
+sed -n '/^TLS_/p' prereport.txt | awk '{print $NF,$0}' | sort | awk '{$1=""; print substr($0, 2)}' > $site_name.txt
+
 rm prereport.txt
 rm *.json
 cat $site_name.txt
