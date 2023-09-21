@@ -71,7 +71,7 @@ done
 # Create final report and clean up #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-sed '/^-/d' prereport.txt > $site_name.txt
+sed -n '/^TLS_/p' prereport.txt > $site_name.txt
 rm prereport.txt
 rm *.json
 cat $site_name.txt
