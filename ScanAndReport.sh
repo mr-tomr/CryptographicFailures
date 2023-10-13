@@ -48,7 +48,7 @@ curl -s --location 'https://ciphersuite.info/api/cs/security/weak' \
 curl -s --location 'https://ciphersuite.info/api/cs/security/secure' \
 --header 'Accept: application/json' > secure.json
 
-# Fetch secure ciphers
+# Fetch recommended ciphers
 curl -s --location 'https://ciphersuite.info/api/cs/security/recommended' \
 --header 'Accept: application/json' > recommended.json
 
