@@ -82,7 +82,7 @@ for cipher in $ciphers; do
         echo "$cipher: secure" >> $output_file
     fi
 
-    # Search the cipher in weak.json
+    # Search the cipher in recommended.json
     if grep -q "\"$cipher\"" recommended.json; then
         echo "$cipher: recommended" >> $output_file
     fi
