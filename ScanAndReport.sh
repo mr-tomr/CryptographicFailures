@@ -3,24 +3,34 @@
 # Scan site for vulnerable ciphers.
 # Created 20230921
 # Created by Tom R.
-# Example Command - scanandreport.sh example.com
+
+# Usage scanandreport.sh <site_name> [port]
+# Example - scanandreport.sh example.com
+# Example - scanandreport.sh example.com 8443
 # The output can be sorted by severity, by adjusting which SED command is commented.
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Running NMAP Scan and Creating Output File #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Check if the site name argument is provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <site_name>"
+# Check if at least the site name argument is provided
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <site_name> [port]"
     exit 1
 fi
 
 # Get the site name from the command line argument
 site_name=$1
 
-# Run nmap with the provided site name
-nmap --script ssl-cert,ssl-enum-ciphers -p 443 $site_name -oN $site_name.nmap
+# Get the port number from the command line argument, default to 443
+port_number=${2:-443}
+
+# Create a filename incorporating the site_name and port_number
+file_name="${site_name}_${port_number}"
+
+# Run nmap with the provided site name and port number
+nmap -Pn --script ssl-cert,ssl-enum-ciphers -p $port_number $site_name -oN $site_name.nmap
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Download updated certificate status from ciphersuite.com #
@@ -37,6 +47,11 @@ curl -s --location 'https://ciphersuite.info/api/cs/security/weak' \
 # Fetch secure ciphers
 curl -s --location 'https://ciphersuite.info/api/cs/security/secure' \
 --header 'Accept: application/json' > secure.json
+
+# Fetch secure ciphers
+curl -s --location 'https://ciphersuite.info/api/cs/security/recommended' \
+--header 'Accept: application/json' > recommended.json
+
 
 # Output file where the results will be stored
 output_file="prereport.txt"
@@ -66,6 +81,13 @@ for cipher in $ciphers; do
     if grep -q "\"$cipher\"" secure.json; then
         echo "$cipher: secure" >> $output_file
     fi
+
+    # Search the cipher in weak.json
+    if grep -q "\"$cipher\"" recommended.json; then
+        echo "$cipher: recommended" >> $output_file
+    fi
+
+
 done
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,8 +98,8 @@ done
 #sed -n '/^TLS_/p' prereport.txt > $site_name.txt
 
 # This SED sorts the output by severity. Use only one per file name.
-sed -n '/^TLS_/p' prereport.txt | awk '{print $NF,$0}' | sort | awk '{$1=""; print substr($0, 2)}' > $site_name.txt
+sed -n '/^TLS_/p' prereport.txt | awk '{print $NF,$0}' | sort | awk '{$1=""; print substr($0, 2)}' > $file_name.txt
 
 rm prereport.txt
 rm *.json
-cat $site_name.txt
+cat $file_name.txt
