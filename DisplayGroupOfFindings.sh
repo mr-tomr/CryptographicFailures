@@ -8,6 +8,21 @@
 
 # OneLiner - for file in *.txt; do if [[ $(wc -l < "$file") -gt 0 ]]; then echo "File: $file"; cat "$file"; echo; fi; done
 
+# Make Consumable in Word
+# Pipe to file named findings or anything you like.
+# Add tabs to the lines with ciphers
+sed '/^TLS/s/^/\t/' findingsList.txt > findingstabbedtxt
+
+# Put in Word and use Word's regex to highlight the lines with a single IP address.
+# 1.1.1.21_([0-9]{1,5})
+# Ensure "Use wildcards" is selected.
+# Use Replace to chnage the selection to the appropriate Style.
+# Note, select "Replace with:" box then select the new Style under "Replace Format"
+
+
+
+
+
 #!/bin/bash
  
 # Loop through all files in the current directory
