@@ -19,9 +19,7 @@ sed '/^TLS/s/^/\t/' findingsList.txt > findingstabbedtxt
 # Use Replace to chnage the selection to the appropriate Style.
 # Note, select "Replace with:" box then select the new Style under "Replace Format"
 
-
-
-
+# Named catresults.txt in this example
 
 #!/bin/bash
  
@@ -41,3 +39,8 @@ done
 # This will need to be filtered to create Instances in a report
 # output results then grab the host names with IPs
 ./catresults.sh | grep Host | awk '{print $4}' | sort -t '_' -k 2n | sed 's/\.txt$//'
+
+# Filter results for a list of ports that have ssl
+
+./catresults.sh | grep Host | awk '{print $4}' | sort -t '_' -k 2n | sed 's/\.txt$//' | awk -F_ '{print $2}'
+
