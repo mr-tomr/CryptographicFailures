@@ -32,9 +32,9 @@ file_name="${site_name}_${port_number}"
 nmap -Pn --script ssl-cert,ssl-enum-ciphers -p $port_number $site_name -oN $site_name.nmap
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Download updated certificate status from ciphersuite.com #
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Download updated certificate status from ciphersuite.info #
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Fetch insecure ciphers
 curl -s --location 'https://ciphersuite.info/api/cs/security/insecure' \
