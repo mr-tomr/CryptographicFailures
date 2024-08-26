@@ -7,6 +7,8 @@
 
 
 # OneLiner - for file in *.txt; do if [[ $(wc -l < "$file") -gt 0 ]]; then echo "File: $file"; cat "$file"; echo; fi; done
+# Grep out secure - for file in 11 *.txt; do [ -s "$file" ] && echo "File: $file" && grep -v "secure" "$file" && echo; done > findingslist.txt
+
 
 # Make Consumable in Word
 # Pipe to file named findings or anything you like.
