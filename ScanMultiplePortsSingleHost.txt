@@ -4,7 +4,7 @@
 # Output Results to individual files for each port.
 # Created 20240508
 # Created by Tom R.
-nano 
+
 # Usage: scanandreport.sh <ip_address> <ports_file>
 # Example: scanandreport.sh 192.168.1.1 ports.txt
 
