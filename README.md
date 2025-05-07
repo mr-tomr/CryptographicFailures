@@ -1,4 +1,4 @@
-# CryptographicFailures
+# Cryptographic Failures
 Tools to test and report about Cryptographic Failures (OWASP A02-2021).
 ScanAndReport.sh combines all tools.
 
