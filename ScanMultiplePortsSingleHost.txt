@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Scan multple ports on single host, for vulnerable ciphers.
+# Scan multple ports on single host, for vulnerable ciphers. 
 # Output Results to individual files for each port.
 # Created 20240508
 # Created by Tom R.
