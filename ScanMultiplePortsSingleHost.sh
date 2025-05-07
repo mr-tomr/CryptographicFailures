@@ -5,8 +5,8 @@
 # Created 20240508
 # Created by Tom R.
 
-# Usage: scanandreport.sh <ip_address> <ports_file>
-# Example: scanandreport.sh 192.168.1.1 ports.txt
+# Usage: ScanMultiplePortsSingleHost.sh <ip_address> <ports_file>
+# Example: ScanMultiplePortsSingleHost.sh 192.168.1.1 ports.txt
 # Use https://github.com/mr-tomr/CryptographicFailures/blob/main/findSSL.py to create the port list, if there are a large number of ports.
 
 # Check if both arguments are provided
