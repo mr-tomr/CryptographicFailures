@@ -20,4 +20,7 @@ ScanAndReport.sh combines all tools.
 
 <img src="https://github.com/mr-tomr/CryptographicFailures/blob/main/images/findSSLpy.jpg" alt="Alt Text" style="width: 400px;">
 
+[Sweet32Check.sh](https://github.com/mr-tomr/CryptographicFailures/blob/main/Sweet32Check.sh)
+
+<img src="https://github.com/mr-tomr/CryptographicFailures/blob/main/images/Sweet32Checksh.jpg" alt="Alt Text" style="width: 400px;">
 
