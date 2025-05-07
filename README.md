@@ -18,6 +18,6 @@ ScanAndReport.sh combines all tools.
 
 [findSSL.py](https://github.com/mr-tomr/CryptographicFailures/blob/main/findSSL.py)
 
-<img src="https://github.com/mr-tomr/CryptographicFailures/blob/main/images/findSSL.py" alt="Alt Text" style="width: 400px;">
+<img src="https://github.com/mr-tomr/CryptographicFailures/blob/main/images/findSSLpy.jpg" alt="Alt Text" style="width: 400px;">
 
 
