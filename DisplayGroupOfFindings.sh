@@ -5,6 +5,9 @@
 # Display contents of each file in directory that has a WC > 0.
 # Used when scanning a large number of ports on one host.
 
+# Previous results may have duplicate lines, b/c each cipher version on an interface may have a duplicate.
+# BEFORE aggregating for reporting, verify no duplicates and run the following to remote them.
+# for file in [0-9]*.txt; do sort -u "$file" -o "$file"; done
 
 # OneLiner - for file in *.txt; do if [[ $(wc -l < "$file") -gt 0 ]]; then echo "File: $file"; cat "$file"; echo; fi; done
 # Grep out secure - for file in 11 *.txt; do [ -s "$file" ] && echo "File: $file" && grep -v "secure" "$file" && echo; done > findingslist.txt
