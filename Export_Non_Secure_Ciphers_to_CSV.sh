@@ -4,6 +4,9 @@
 
 mkdir -p csv && for f in 11*.txt; do grep -v 'secure|recommended' "$f" > "csv/$f"; done
 
+# To export ciphers vulnerble to Sweet32, use the following
+mkdir -p sweet32tracker && for f in 11*.txt; do grep -E '3DES_EDE_CBC|DES_CBC_SHA' "$f" > "sweet32tracker/$f"; done
+
 # Create a Bash script named csvparse.sh and use it to create a CSV file 
 # Where each filename is the IP and port number and in the first column.
 # Non secure ciphers are in the second column in the corresponding cell.
