@@ -44,6 +44,7 @@ import json
 import os
 import re
 import shutil
+import ssl
 import subprocess
 import sys
 import urllib.error
@@ -59,6 +60,11 @@ except ImportError:
     Document = None
 
 API_BASE = "https://ciphersuite.info/api/cs/security"
+# Skips TLS certificate/hostname validation when pulling classification data from
+# ciphersuite.info (e.g. behind an intercepting proxy or with an untrusted CA chain).
+# This weakens the connection to the API itself; it has no effect on the ciphers
+# reported for scanned targets.
+UNVERIFIED_SSL_CONTEXT = ssl._create_unverified_context()
 CLASSIFICATIONS = ("insecure", "weak", "secure", "recommended")
 REPORTABLE = {"insecure", "weak"}
 SWEET32_RE = re.compile(r"(?:3DES_EDE_CBC|DES_CBC_SHA)", re.IGNORECASE)
@@ -347,7 +353,7 @@ def fetch_classification_texts(cache_dir: Path) -> Dict[str, str]:
         print(f"[*] Downloading cipher classification: {classification}")
         req = urllib.request.Request(url, headers=headers)
         try:
-            with urllib.request.urlopen(req, timeout=30) as response:
+            with urllib.request.urlopen(req, timeout=30, context=UNVERIFIED_SSL_CONTEXT) as response:
                 text = response.read().decode("utf-8", errors="replace")
         except (urllib.error.URLError, TimeoutError) as exc:
             cached = cache_dir / f"{classification}.json"
